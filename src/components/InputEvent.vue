@@ -227,7 +227,6 @@ export default {
       //     console.log(err);
       //   });
       if (this.title && this.address && this.date && this.description != null) {
-        
         axios
           .post("http://localhost:3000/event/create", {formData})
           .then(res => {
