@@ -3,33 +3,22 @@
   <v-row justify="center" >
     <v-col cols="12" sm="10" md="8" lg="6">
       <v-card ref="form">
+        <h2 class="teal--text text--lighten-1 text-center">Create an Event</h2>
         <template>
-          <v-card
-            class="mx-auto"
-            max-width="400"
-          > <Imageupload />
+          <v-card class="mx-auto" max-width="400"> 
+            <!-- <Imageupload /> -->
+            <v-img class="white--text align-end" height="300px" :src="img" @click="$refs.file.click()"></v-img>
+
+            <!-- hidden file para sa file handling -->
+            <input type="file" id="file" @change="handleFileUpload()" ref="file" style="display:none">
           </v-card>
         </template>
-        <h1 class="text-center">Create an Event</h1>
-       
         <v-card-text>
-          <v-text-field
-              v-model="title"
-              prepend-icon="fas fa-file"
-              label="Title"
-              placeholder="Title for the event"
-              required
-            ></v-text-field>
-            <!-- <v-col cols="12" sm="6" md="4"> -->
-            <v-menu
-              ref="menu"
-              v-model="menu"
-              :close-on-content-click="false"
-              :return-value.sync="date"
-              transition="scale-transition"
-              offset-y
-              min-width="290px"
-            >
+          <!-- For input of title -->
+          <v-text-field v-model="title" prepend-icon="fas fa-file" label="Title" placeholder="Title for the event"  required></v-text-field>
+          <!-- For input of date -->
+            <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :return-value.sync="date" transition="scale-transition" offset-y min-width="290px" >
+          <!-- For picking the date on the calendar -->
             <template v-slot:activator="{ on }">
               <v-text-field
                 v-model="date"
@@ -45,29 +34,10 @@
               <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
             </v-date-picker>
           </v-menu>
-           <v-textarea
-          name="input-7-1"
-          filled
-          placeholder="Description of the event"
-          prepend-icon="fas fa-file-alt"
-          label="Description"
-          v-model="description"
-          auto-grow
-        ></v-textarea>
-        
-        <v-file-input
-          label="File input"
-          filled
-          prepend-icon="fas fa-camera-retro"
-        ></v-file-input>
-        <v-text-field
-              v-model="address"
-              prepend-icon="fas fa-map-marker-alt"
-              label="Venue"
-              placeholder="Venue"
-              required
-        ></v-text-field>
-
+          <!-- For input of Venue -->
+          <v-text-field v-model="address" prepend-icon="fas fa-map-marker-alt" label="Venue" placeholder="Venue" required ></v-text-field>
+          <!-- For input for Description-->
+          <v-textarea name="input-7-1" filled placeholder="Description of the event" prepend-icon="fas fa-file-alt" label="Description" v-model="description" auto-grow ></v-textarea>
         </v-card-text>
         <v-divider class="mt-12"></v-divider>
 
@@ -103,15 +73,42 @@
 </template>
 
 <style>
+.v-application .text-center {
+    text-align: center !important;
+    font-size: 46px;
+    color: white;
+}
+element.style {
+    background-image: url(http://localhost:8081/img/logopictures.3530da54.jpeg);
+    background-position: center center;
+    height: auto;
+    height: 80%;
+    width: 60%;
+    /* align-self: center; */
+    margin-top: 7%;
+    margin-left: 20%;
+}
+.v-image__image, .v-image__placeholder {
+    z-index: -1;
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    width: 60%;
+    height: 80%;
+}
+
 
 </style>
 
 <script>
 import axios from 'axios'
-import Imageupload from "../components/imageupload.vue"
+// import Imageupload from "../components/imageupload.vue"
   export default {
     name:"InputEvent",
     data: () => ({
+      img:
+        require("@/assets/logopictures.jpeg"),
+      file: "",
       date: new Date().toISOString().substr(0, 10),
       menu: false,
       modal: false,
@@ -124,9 +121,9 @@ import Imageupload from "../components/imageupload.vue"
             scale: 1,
             borderRadius: 0
     }),
-    components:{
-      Imageupload
-    },
+    // components:{
+    //   Imageupload
+    // },
 
     computed: {
       form () {
@@ -145,6 +142,11 @@ import Imageupload from "../components/imageupload.vue"
     },
 
     methods: {
+          handleFileUpload() {
+      this.file = this.$refs.file.files[0];
+      this.imgUrl = URL.createObjectURL(this.file);
+    },
+
       
  saveClicked: function saveClicked() {
             var img = this.$refs.vueavatar.getImageScaled();
@@ -170,8 +172,35 @@ import Imageupload from "../components/imageupload.vue"
         })
       },
       submit () {
+ /*
+                Initialize the form data
+            */
+      let formData = new FormData();
+
+      /*
+                Add the form data we need to submit
+            */
+      formData.append("img", this.file);
+      /*
+          Make the request to the POST /single-file URL
+      //   */
+      // axios
+      //   .post("http://localhost:3000/uploadSingle", formData, {
+      //     headers: {
+      //       "Content-Type": "multipart/form-data"
+      //     }
+      //   })
+      //   .then((res)=> {
+      //     console.log(res);
+          
+      //    this.imgUrl = res.data.filename;
+      //   })  
+      //   .catch((err)=> {
+      //     console.log(err);
+      //   });
         if(this.title && this.address && this.date && this.description != null){
             var data = {
+              image: this.file,
               title : this.title,
               dateevent : this.date,
               description : this.description,

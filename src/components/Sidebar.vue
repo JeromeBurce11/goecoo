@@ -4,7 +4,7 @@
       <thead class="back">
         <tr>
           <th class="text-left">
-            <v-btn x-large color="teal"><v-icon @click.stop="drawer = !drawer">fas fa-bars</v-icon> </v-btn> &nbsp;&nbsp;&nbsp;&nbsp;GoEco
+            <v-btn x-large color="teal" @click.stop="drawer = !drawer"><v-icon >fas fa-bars</v-icon> </v-btn> &nbsp;&nbsp;&nbsp;&nbsp;GoEco
           </th>
           <th class="text-right">
            
@@ -58,7 +58,7 @@
             <v-list-item-title>Add Event</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item>
+        <v-list-item link @click="aboutus()">
           <v-list-item-action>
             <v-icon>fas fa-building</v-icon>
           </v-list-item-action>
@@ -148,8 +148,11 @@ export default {
     addevent() {
       this.$router.push("/addevent");
     },
+     aboutus(){
+      this.$router.push("/aboutus");
+    },
     logout(){
-      this.$router.push("/");
+      this.$router.push("/admin");
     }
   }
 };

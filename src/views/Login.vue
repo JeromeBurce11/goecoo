@@ -8,7 +8,7 @@
       
       <v-container>
         <center>
-          <v-img src="@/assets/accountIcon.jpeg" id="image"></v-img>
+          <v-img src="@/assets/adminlogo.jpeg" id="image"></v-img>
           <h1>Admin</h1>
         </center>
         <form id="form">

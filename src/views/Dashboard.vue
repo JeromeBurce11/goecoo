@@ -9,7 +9,7 @@
           <div id="title">
             <h1>{{event.title}}</h1>
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr24QAZ3WY5yDvMErZIPnLtxg4jgYKyfcLVLsmM8rGV1CCvEHA&s"
+              :src="event.image"
             >
             <h4>Date : {{event.dateEvent}}</h4>
             <h4>Location : {{event.address}}</h4>
