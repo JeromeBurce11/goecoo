@@ -35,25 +35,7 @@
         </label>
       </image-uploader>
     </div>
-    <!-- <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://www.npmjs.com/package/vue-image-upload-resize"
-          target="_blank"
-        >
-          npm package
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/kartoteket/vue-image-upload-resize"
-          target="_blank"
-        >
-          github page
-        </a>
-      </li>
-    </ul> -->
+    
   </v-card-actions>
   </div>
 </v-flex>
@@ -74,7 +56,7 @@ export default {
     setImage: function(output) {
       this.hasImage = true;
       this.image = output;
-      console.log(this.image);
+      alert(JSON.stringify(this.image));
     }
   }
 };

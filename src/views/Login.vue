@@ -89,17 +89,15 @@ export default {
   },
   methods: {
       login(){
-          axios.post('http://localhost:3000/admin/login',{data:{username : this.user.username,
-           password : this.user.password}})
-          .then(res =>{
-            alert(res.data)
-            if(res.data == 'proceed'){
-            this.$router.push('/dashboard')
-            }
-          })
-          .catch(err =>{
-            alert('error')
-          })
+        let username = this.user.username;
+            let password = this.user.password;
+            this.$store
+                .dispatch("login", {
+                    username,
+                    password
+                })
+                .then(() => this.$router.push("/dashboard"))
+                .catch();
       }
     ,
     clear() {

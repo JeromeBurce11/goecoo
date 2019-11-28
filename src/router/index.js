@@ -37,7 +37,7 @@ const routes = [
   },
   {
     path:"/addevent",
-    name:"addevent",
+    name:"AddEvent",
     component:AddEvent,
     meta: {
         tokenRequired: false

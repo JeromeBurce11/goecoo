@@ -49,7 +49,7 @@
             <v-list-item-title>Subscriber List</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link @click="addevent()">
+        <v-list-item link @click="AddEvent()">
           <v-list-item-action>
             <v-icon>fas fa-calendar-plus</v-icon>
            
@@ -145,7 +145,7 @@ export default {
     dashboard() {
       this.$router.push("/dashboard");
     },
-    addevent() {
+    AddEvent() {
       this.$router.push("/addevent");
     },
      aboutus(){

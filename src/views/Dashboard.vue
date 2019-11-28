@@ -8,9 +8,9 @@
           <h4>{{event.dateCreated}}</h4>
           <div id="title">
             <h1>{{event.title}}</h1>
-            <img
-              :src="event.image"
-            >
+            <v-img
+              v-bind:src="event.image"
+            ></v-img>
             <h4>Date : {{event.dateEvent}}</h4>
             <h4>Location : {{event.address}}</h4>
             <h4>Posted by : {{event.createdBy}}</h4>
@@ -48,8 +48,7 @@
           </template>
 
           <v-card-text>
-            <v-text-field
-              ref="name"
+            <v-text-field 
               v-model="title"
               prepend-icon="fas fa-file"
               label="Title"
@@ -119,7 +118,7 @@ import Sidebar from "../components/Sidebar.vue";
 export default {
   name: "Dashboard",
   components: {
-    Sidebar
+    Sidebar,
     // CardsOfEvents
   },
   data() {
